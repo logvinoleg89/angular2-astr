@@ -39,6 +39,9 @@ export class SeedConfig {
   CSS_DEST             = `${this.APP_DEST}/css`;
   JS_DEST              = `${this.APP_DEST}/js`;
   VERSION              = appVersion();
+  
+  API_VERSION          = 'v1';
+  API_URL              = `http://api.astro.2muchcoffee.com/${this.API_VERSION}`;
 
   CSS_PROD_BUNDLE      = 'all.css';
   JS_PROD_SHIMS_BUNDLE = 'shims.js';
