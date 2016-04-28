@@ -7,8 +7,13 @@ const plugins = <any>gulpLoadPlugins();
 
 export function watch(taskname: string) {
   return function () {
-    plugins.watch(join(APP_SRC, '**'), (e:any) =>
-      runSequence(taskname, () => notifyLiveReload(e))
+    plugins.watch([
+        join(APP_SRC, '**/*.html'),
+        join(APP_SRC, '**/*.ts'),
+        join(APP_SRC, '**/*.scss'),
+        join(APP_SRC, '**/*.css')
+      ], (e:any) =>
+        runSequence(taskname, () => notifyLiveReload(e))
     );
   };
 }
