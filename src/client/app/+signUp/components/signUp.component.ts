@@ -11,27 +11,36 @@ import {Wish, WishService} from '../../wish/index';
 import {Employment, EmploymentService} from '../../employment/index';
 import {Relationship, RelationshipService} from '../../relationship/index';
 
+import {StepOneComponent} from './stepOne/stepOne.component';
+import {StepTwoComponent} from './stepTwo/stepTwo.component';
+import {StepsService} from '../services/steps.service';
+
 
 @Component({
   selector: 'sd-sign-up',
   templateUrl: 'app/+signUp/components/signUp.component.html',
   styleUrls: ['app/+signUp/components/signUp.component.css'],
   providers: [
+    StepsService,
     UserService,
     SignService,
     WishService,
     EmploymentService,
     RelationshipService,
   ],
-  directives: [FORM_DIRECTIVES, CORE_DIRECTIVES]
+  directives: [FORM_DIRECTIVES, CORE_DIRECTIVES, StepOneComponent, StepTwoComponent]
 })
 export class SignUpComponent {
+
+  public step = 1;
+
   public formData = {
     firstName: '',
     lastName: '',
   };
 
   constructor(
+    private _stepsService:StepsService,
     private _userService:UserService,
     private _signService:SignService,
     private _wishService:WishService,
@@ -40,8 +49,9 @@ export class SignUpComponent {
   ) {
   }
 
-
   ngOnInit() {
+    this.step = this._stepsService.currentStep;
+
     this.getSign();
     this.getWish();
     this.getEmployment();
